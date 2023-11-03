@@ -1,44 +1,65 @@
-
-//Creating a function for partition, and it will return the index of exact location of pivot which will be j
-//partition function wil take 3 parameter: high, low and the array we have to sort.
-fun partition(l:Int,h:Int,arr:IntArray):Int{
+fun partition(l: Int, h: Int, arr: IntArray): Int {
     var i = l
     var j = h
-    var pivot = arr[l]
+    val pivot = arr[l]
 
-    while (i<j){
-        while (arr[i]<pivot){
+    while (i < j) {
+        while (arr[i] < pivot) {
             i++
         }
-        while (arr[j]>pivot){
-
+        while (arr[j] > pivot) {
             j--
         }
-        if (i>j){
-            return j
+
+        // Break if we have crossed each other
+        if (i >= j) {
+            break
         }
-        // Swap
-        var temp = arr[i]
+
+        // Swap the elements
+        val temp = arr[i]
         arr[i] = arr[j]
         arr[j] = temp
 
-        //Increasing low element index
+        //Incrementing the swapping lower Index
         i++
-        //Decreasing upper element index
+        //Decrementing the swapping upper Index
         j--
-
-
     }
 
     return j
+}
+
+fun QuickSort(l: Int, h: Int, arr: IntArray) {
+    if (l < h) {
+        val pivotIdx = partition(l, h, arr)
+        QuickSort(l, pivotIdx, arr)
+        QuickSort(pivotIdx + 1, h, arr)
+    }
+
 
 }
 
+fun main(args: Array<String>) {
+    // Creating an array
+    val arr = intArrayOf(3, 4, 1, 5, 6, 7, 9, 8, 2)
 
-fun main (){
-    //Creating an array
-    var arr = intArrayOf(3,4,1,5,6,7,9,8,2)
-    var low = 0
-    var high = arr.size -1
+    // Unsorted array
+    println("Unsorted array is:")
+    arr.forEach { print("$it ") } // Add a space after each number
+    println()
 
+    // Perform quicksort
+    QuickSort(0, arr.size - 1, arr)
+
+    // Sorted array
+    println("Sorted array is:")
+    arr.forEach { print("$it ") } // Add a space after each number
 }
+
+
+
+
+
+
+
