@@ -1,4 +1,4 @@
 fun main (){
 
-    println("This is me")
+    println("This is QuickSort")
 }
